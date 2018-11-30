@@ -12,7 +12,17 @@ class Api::V1::UsersController < ApplicationController
         render json: {error: 'User not found.'}, status: 400
       end
     end
-  
+    
+    def update
+      @user = User.find_by(id: params[:id])
+      @user.update(user_params)
+      if @user.save
+        render json: @user
+      else
+        render json: {error: 'Unable to update user.'}, status: 400
+      end
+    end
+
     def create
       @user = User.new(user_params)
       if @user.save
@@ -34,6 +44,6 @@ class Api::V1::UsersController < ApplicationController
   
     private
     def user_params
-      params.require(:user).permit(:username)
+      params.require(:user).permit(:username, :is_active)
     end
 end  
