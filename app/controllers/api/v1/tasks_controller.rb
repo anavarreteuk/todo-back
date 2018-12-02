@@ -19,6 +19,16 @@ class Api::V1::TasksController < ApplicationController
       end
     end
 
+    def update
+      @task = Task.find_by(id: params[:id])
+      @task.update(task_params)
+      if @task.save
+        render json: @task
+      else
+        render json: {error: 'Unable to update task.'}, status: 400
+      end
+    end
+
     def destroy
       @task = Task.find_by(id: params[:id])
         if@task
@@ -29,6 +39,6 @@ class Api::V1::TasksController < ApplicationController
   
     private
     def task_params
-      params.require(:task).permit(:date, :title, :location, :time, :beforeImage, :afterImage, :user_id, :progress, :started, :finished)
+      params.require(:task).permit(:date, :title, :location, :time, :beforeImage, :afterImage, :user_id, :progress, :started, :finished, :is_active)
     end
   end
