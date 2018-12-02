@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_145722) do
+ActiveRecord::Schema.define(version: 2018_12_01_160851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_145722) do
     t.string "progress"
     t.boolean "started"
     t.boolean "finished"
+    t.boolean "is_active", default: true
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 

@@ -1,2 +1,2 @@
       invoke  active_record
-      create    db/migrate/20181130143910_add_is_active_to_users.rb
+      create    db/migrate/20181201160851_add_is_active_to_tasks.rb
