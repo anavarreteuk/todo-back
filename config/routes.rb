@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace 'v1' do
       resources :users
       resources :tasks
+      post 'signin', to: 'users#signin'
     end
   end
 end

@@ -41,9 +41,18 @@ class Api::V1::UsersController < ApplicationController
         render json: {error: 'User not found.'}, status: 400
       end
     end
+
+    def signin
+      @user = User.find_by(email: params[:email])
+        if @user && @user.authenticate(params[:password])
+          render json: @user
+        else
+          render json: {error: 'Email/Password Invalid.'}, status: 401
+        end
+    end
   
     private
     def user_params
-      params.require(:user).permit(:username, :is_active, :firstname, :lastname, :email, :city, :country)
+      params.require(:user).permit(:username, :is_active, :firstname, :lastname, :email, :city, :country, :password_digest)
     end
 end  
